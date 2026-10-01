@@ -1,0 +1,2 @@
+User-agent: *
+Disallow: file:///C:/Users/HP/Downloads/index.html
