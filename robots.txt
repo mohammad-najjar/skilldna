@@ -1,2 +1,3 @@
 User-agent: *
 Disallow: file:///C:/Users/HP/Downloads/index.html
+Disallow: https://mohammad-najjar.github.io/skilldna/
