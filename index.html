@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7033660112444751"
-     crossorigin="anonymous"></script>
-<meta name="robots" content="noindex, nofollow">
-
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>SkillDNA — Discover What You're Naturally Good At</title>
@@ -66,6 +62,7 @@ h2{font-size:1.5rem;letter-spacing:-.02em;margin:1.8em 0 .6em}
 .note{color:var(--mut);font-size:.85rem;margin-top:28px}
 .toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:99px;font-weight:600;z-index:9}
 footer{text-align:center;color:var(--mut);font-size:.9rem;padding:24px 20px}
+.jobcard{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--sh)}.jobn{font-size:clamp(1.6rem,6vw,2.3rem);font-weight:800;letter-spacing:-.02em}.ctx{color:var(--mut);font-size:.9rem;margin:0 0 10px}
 [dir=rtl] *{letter-spacing:0!important}[dir=rtl] .rcard:after{right:auto;left:-90px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
@@ -78,24 +75,24 @@ footer{text-align:center;color:var(--mut);font-size:.9rem;padding:24px 20px}
 <h1 id="h1"></h1>
 <p class="sub" id="sub">Answer a few questions and uncover the skills hiding in the way you think, create, communicate, and solve problems.</p>
 <p style="margin-top:28px"><button class="btn pri" id="start">Discover My Skills →</button></p>
-<p class="trust" id="trust">12 questions • 3 minutes • No account required</p>
+<p class="trust" id="trust">10 smart questions • 3 minutes • No account required</p>
 <div class="chips" id="chips" aria-hidden="true"></div>
 </section>
 
 <section id="quiz" hidden aria-live="polite">
 <div class="meta"><span id="count">Question 1 of 12</span><span id="pct">0%</span></div>
 <div class="bar" role="progressbar" aria-label="Quiz progress" aria-valuemin="0" aria-valuemax="100"><i id="fill"></i></div>
-<div class="qcard" id="qcard"><h3 id="qtext" tabindex="-1"></h3><div id="answers"></div></div>
+<div class="qcard" id="qcard"><p class="ctx" id="ctx" hidden></p><h3 id="qtext" tabindex="-1"></h3><div id="answers"></div></div>
 <div class="nav"><button class="btn" id="prev">← Previous</button><button class="btn pri" id="next">Next →</button></div>
 </section>
 
 <section id="result" hidden>
-<div class="rcard" id="rcard"><small id="rsmall"></small><h2 id="pname"></h2><div class="top3" id="top3"></div><div class="foot" id="rfoot">Discover yours at SkillDNA</div></div>
+<div class="rcard" id="rcard"><small id="rsmall"></small><h2 id="pname"></h2><div id="rjob" style="font-weight:600"></div><div class="top3" id="top3"></div><div class="foot" id="rfoot">Discover yours at SkillDNA</div></div>
 <div class="row"><button class="btn pri" id="share">Share My Results</button><button class="btn" id="copy">Copy Result</button><button class="btn" id="again">Take the Test Again</button></div>
 <h2 id="h2a"></h2><div id="top5"></div>
 <p style="margin:16px 0"><button class="btn" id="toggle" aria-expanded="false">Explore all skills</button></p>
 <div id="all" class="all" hidden></div>
-<h2 id="h2b"></h2><p id="interp" class="sub" style="color:var(--ink);font-size:1.08rem"></p>
+<h2 id="h2j"></h2><div class="jobcard"><div class="jobn grad" id="jobn"></div><p id="jobw"></p><p id="joba" style="color:var(--mut)"></p><p id="ruled" style="color:var(--c);font-weight:600" hidden></p><div class="row" style="margin-top:8px"><button class="btn pri" id="jobok"></button><button class="btn" id="jobno"></button></div></div><h2 id="h2b"></h2><p id="interp" class="sub" style="color:var(--ink);font-size:1.08rem"></p>
 <h2 id="h2c"></h2><p class="sub" id="exp" style="margin-top:-8px">You may enjoy exploring:</p><div class="tags" id="areas" style="margin-top:14px"></div>
 <p class="note" id="note">This result is a self-discovery tool, not a scientific assessment.</p>
 </section>
@@ -125,7 +122,12 @@ const SKILLS = {
  wr:["Writing & Expression","you shape words into something that lands","Writing","Content Creation","Storytelling","Copywriting"],
  nu:["Numerical Thinking","you're comfortable making sense of numbers and data","Data Analysis","Finance","Economics","Investing"],
  st:["Strategic Thinking","you see the long game and how the pieces connect","Strategy","Consulting","Business Planning","Game Design"],
- in:["Innovation","you look for better ways nobody has tried yet","Product Design","Research & Development","Startups","Invention"]
+ in:["Innovation","you look for better ways nobody has tried yet","Product Design","Research & Development","Startups","Invention"],
+ph:["Physical Ability","your body is a real strength — you handle physical challenges with control","Sports","Fitness Coaching","Skilled Trades","Outdoor Work"],
+ex:["Exploration","you're drawn to the unfamiliar and find your way in it","Travel","Field Research","Adventure Guiding","Photography"],
+tc:["Technical Aptitude","you're at home with technology and how systems work","Software Engineering","IT & Security","Data Work","Automation"],
+rs:["Resilience","you stay steady, patient and self-controlled under pressure","Emergency Response","Coaching","Leadership Roles","Healthcare"],
+pf:["Performance","you come alive in front of others and express yourself on stage","Acting","Music","Public Speaking","Presenting"]
 };
 const PROFILES = [
  ["The Strategist",["st","pl","dm"],"You see the whole board and think several moves ahead."],
@@ -231,7 +233,12 @@ pr:["التفكير العملي","تفضّل ما ينجح فعلًا في ال
 wr:["الكتابة والتعبير","تصوغ الكلمات بحيث تترك أثرًا","الكتابة","صناعة المحتوى","السرد القصصي","كتابة الإعلانات"],
 nu:["التفكير الرقمي","ترتاح للأرقام والبيانات وتفهمها","تحليل البيانات","المالية","الاقتصاد","الاستثمار"],
 st:["التفكير الاستراتيجي","ترى الصورة بعيدة المدى وكيف تترابط أجزاؤها","الاستراتيجية","الاستشارات","تخطيط الأعمال","تصميم الألعاب"],
-in:["الابتكار","تبحث عن طرق أفضل لم يجرّبها أحد","تصميم المنتجات","البحث والتطوير","الشركات الناشئة","الاختراع"]},
+in:["الابتكار","تبحث عن طرق أفضل لم يجرّبها أحد","تصميم المنتجات","البحث والتطوير","الشركات الناشئة","الاختراع"],
+ph:["القدرة الجسدية","جسدك نقطة قوة حقيقية — تتعامل مع التحديات الجسدية بتحكّم","الرياضة","التدريب البدني","الحِرف والمهن الفنية","العمل في الهواء الطلق"],
+ex:["الاستكشاف","تنجذب إلى المجهول وتجد طريقك فيه","السفر","البحث الميداني","الإرشاد السياحي والمغامرات","التصوير"],
+tc:["الميل التقني","ترتاح للتقنية وطريقة عمل الأنظمة","هندسة البرمجيات","تقنية المعلومات والأمن","العمل على البيانات","الأتمتة"],
+rs:["الصلابة النفسية","تبقى ثابتًا وصبورًا وضابطًا لنفسك تحت الضغط","الاستجابة للطوارئ","التدريب","المناصب القيادية","الرعاية الصحية"],
+pf:["الأداء","تزداد حيوية أمام الآخرين وتعبّر عن نفسك على المسرح","التمثيل","الموسيقى","الخطابة","العروض التقديمية"]},
 profiles:[
 ["المخطِّط الاستراتيجي","ترى الرقعة كاملة وتفكر في عدة خطوات للأمام."],
 ["المبدع","تحوّل الخيال إلى أشياء يشعر بها الآخرون."],
@@ -264,20 +271,20 @@ q:[
 ["عليك إقناع شخص بتجربة فكرة تؤمن بها. ما أسلوبك؟","أربطها بما يهمّه شخصيًا","أريه الأرقام والأدلة","أكتب حجة واضحة ومقنعة","أدعه يجرّب نسخة صغيرة منها بنفسه"]]};
 const UI={en:{other:"العربية",title:"SkillDNA — Discover What You're Naturally Good At",h1:["Discover What You're ","Naturally Good At."],
 sub:"Answer a few questions and uncover the skills hiding in the way you think, create, communicate, and solve problems.",
-trust:"12 questions • 3 minutes • No account required",start:"Discover My Skills →",prev:"← Previous",next:"Next →",see:"See My Skill DNA →",
+trust:"10 smart questions • 3 minutes • No account required",start:"Discover My Skills →",prev:"← Previous",next:"Next →",see:"See My Skill DNA →",
 count:(a,b)=>`Question ${a} of ${b}`,h2a:"Your strongest skills",h2b:"What this says about you",h2c:"Where these skills can take you",exp:"You may enjoy exploring:",
 note:"This result is a self-discovery tool, not a scientific assessment.",f1:"SkillDNA © 2026",f2:"Discover yourself. Explore your potential.",
 rsmall:"SkillDNA · Your Skill DNA",rfoot:"Discover yours at SkillDNA",share:"Share My Results",copy:"Copy Result",again:"Take the Test Again",
-explore:"Explore all skills",hide:"Hide all skills",copied:"Result copied to clipboard",copyfail:"Couldn't copy — select the text manually",stitle:"My SkillDNA",
-sum:(p,top)=>`My SkillDNA: ${p}\nTop skills: ${top}\nDiscover yours at SkillDNA`},
+ctx:a=>`Based on your answer: “${a}”`,h2j:"Your best-fit job",jobok:"✓ Yes, that fits me",jobno:"✗ This job is wrong",ruled:l=>`Ruled out: ${l}`,rej:j=>`You marked “${j}” as wrong — let's narrow it down.`,thanks:"Great — glad it fits!",why:s=>`Because your strongest skills are ${s}.`,alt:"Also a good fit:",rjob:"Best-fit job: ",explore:"Explore all skills",hide:"Hide all skills",copied:"Result copied to clipboard",copyfail:"Couldn't copy — select the text manually",stitle:"My SkillDNA",
+sum:(p,top,j)=>`My SkillDNA: ${p}\nTop skills: ${top}\nBest-fit job: ${j}\nDiscover yours at SkillDNA`},
 ar:{other:"English",title:"SkillDNA — اكتشف ما تتقنه بالفطرة",h1:["اكتشف ما تتقنه ","بالفطرة."],
 sub:"أجب عن بضعة أسئلة واكتشف المهارات الكامنة في طريقة تفكيرك وإبداعك وتواصلك وحلّك للمشكلات.",
-trust:"12 سؤالًا • 3 دقائق • بلا حاجة إلى حساب",start:"اكتشف مهاراتي ←",prev:"→ السابق",next:"التالي ←",see:"اعرض بصمة مهاراتي ←",
+trust:"10 أسئلة ذكية • 3 دقائق • بلا حاجة إلى حساب",start:"اكتشف مهاراتي ←",prev:"→ السابق",next:"التالي ←",see:"اعرض بصمة مهاراتي ←",
 count:(a,b)=>`السؤال ${a} من ${b}`,h2a:"أقوى مهاراتك",h2b:"ماذا تقول هذه النتيجة عنك",h2c:"إلى أين يمكن أن تقودك هذه المهارات",exp:"قد يعجبك استكشاف:",
 note:"هذه النتيجة أداة لاكتشاف الذات وليست تقييمًا علميًا.",f1:"SkillDNA © 2026",f2:"اكتشف نفسك. استكشف إمكاناتك.",
 rsmall:"SkillDNA · بصمة مهاراتك",rfoot:"اكتشف بصمتك على SkillDNA",share:"شارك نتيجتي",copy:"انسخ النتيجة",again:"أعد الاختبار",
-explore:"استعرض كل المهارات",hide:"إخفاء كل المهارات",copied:"تم نسخ النتيجة",copyfail:"تعذّر النسخ — حدّد النص يدويًا",stitle:"SkillDNA الخاص بي",
-sum:(p,top)=>`بصمة مهاراتي على SkillDNA: ${p}\nأبرز مهاراتي: ${top}\nاكتشف بصمتك على SkillDNA`}};
+ctx:a=>`بناءً على اختيارك: «${a}»`,h2j:"وظيفتك الأنسب",jobok:"✓ نعم، تناسبني",jobno:"✗ هذه الوظيفة غير صحيحة",ruled:l=>`تم استبعاد: ${l}`,rej:j=>`حدّدتَ أن «${j}» غير صحيحة — لنحصر الاحتمالات.`,thanks:"رائع — يسعدنا أنها تناسبك!",why:s=>`لأن أقوى مهاراتك هي ${s}.`,alt:"ويناسبك أيضًا:",rjob:"الوظيفة الأنسب: ",explore:"استعرض كل المهارات",hide:"إخفاء كل المهارات",copied:"تم نسخ النتيجة",copyfail:"تعذّر النسخ — حدّد النص يدويًا",stitle:"SkillDNA الخاص بي",
+sum:(p,top,j)=>`بصمة مهاراتي على SkillDNA: ${p}\nأبرز مهاراتي: ${top}\nالوظيفة الأنسب: ${j}\nاكتشف بصمتك على SkillDNA`}};
 const guess=()=>(navigator.language||"").startsWith("ar")?"ar":"en";
 let lang=guess(),lastSorted=[];
 try{lang=localStorage.getItem("sdna-lang")||lang;}catch(e){}
@@ -286,18 +293,22 @@ const L=(k,i)=>(lang==="ar"?AR.skills:SKILLS)[k][i];
 const ql=i=>lang==="ar"?AR.q[i]:[questions[i].q,...questions[i].a.map(a=>a[0])];
 
 /* ---------- Scoring engine ---------- */
-const keys = Object.keys(SKILLS);
-const maxPossible = {};
-keys.forEach(k=>maxPossible[k]=questions.reduce((s,q)=>s+Math.max(0,...q.a.map(a=>a[1][k]||0)),0)||1);
-
-function calculate(answers){
-  const raw = Object.fromEntries(keys.map(k=>[k,0]));
-  answers.forEach((ai,qi)=>{ if(ai==null)return; const sc=questions[qi].a[ai][1]; for(const k in sc) raw[k]+=sc[k]; });
-  const rel = keys.map(k=>[k,raw[k]/maxPossible[k]]);
-  const top = Math.max(...rel.map(r=>r[1]),0.01);
-  const peak = 70 + 28*Math.min(1, top/0.6);
-  return rel.map(([k,r])=>({k,name:SKILLS[k][0],pct:Math.round(r/top*peak),r}))
-            .sort((a,b)=>b.pct-a.pct||b.r-a.r);
+const keys=Object.keys(SKILLS);
+function calculate(path,picks){
+  const raw=Object.fromEntries(keys.map(k=>[k,0])),mx={...raw};
+  path.forEach((qi,n)=>{const A=QQ(qi).a;keys.forEach(k=>{mx[k]+=Math.max(0,...A.map(a=>a[1][k]||0));raw[k]+=A[picks[n]][1][k]||0;});});
+  const rel=keys.map(k=>[k,raw[k]/(mx[k]||1)]),top=Math.max(...rel.map(r=>r[1]),0.01),peak=70+28*Math.min(1,top/0.6);
+  return rel.map(([k,r])=>({k,pct:Math.round(r/top*peak),r})).sort((a,b)=>b.pct-a.pct||b.r-a.r);
+}
+function skillList(tr){
+  const m={};tr.forEach(x=>m[x.k]=x.pct);
+  return SK.map(([d,en,ar,t],i)=>{const ks=t.split(" ");return{i,d,en,ar,sig:t,pct:Math.round(ks.reduce((a,k)=>a+(m[k]||0),0)/ks.length)};}).sort((a,b)=>b.pct-a.pct||a.i-b.i);
+}
+function pickTop(list,n){const sg=new Set(),dc={},out=[];for(const s of list){if(out.length>=n)break;if(sg.has(s.sig)||(dc[s.d]||0)>=2)continue;sg.add(s.sig);dc[s.d]=(dc[s.d]||0)+1;out.push(s);}return out;}
+function rankJobs(tr,p=path,pk=picks){
+  const m={},v={},pen=Math.max(0,40-15*rejected.length),T=JT||(JT=JOBS.map(j=>j[2].split(" ")));tr.forEach(x=>m[x.k]=x.pct);
+  p.forEach((qi,n)=>{const j=QQ(qi).a[pk[n]][2];if(j)j.forEach(x=>v[x]=(v[x]||0)+1);});
+  return JOBS.map((j,i)=>({j,i,s:T[i].reduce((a,k)=>a+(m[k]||0),0)/3+30*(v[i]||0)-(j[3]===clusterOf(p,pk)?0:pen)})).filter(x=>!rejected.includes(x.i)).sort((a,b)=>b.s-a.s).map(x=>x.j);
 }
 function pickProfile(sorted){
   const w = {}; sorted.slice(0,6).forEach((s,i)=>w[s.k]=(6-i)*s.pct);
@@ -317,69 +328,148 @@ function suggestions(sorted){
   return out;
 }
 
+questions.push(
+Q("You're handed a physical task — lifting, climbing, or fixing something — with a time limit. How do you go about it?",[["Lean on stamina and push through",{ph:4,rs:3}],["Find the technique that takes the least effort",{ph:3,pr:3,ps:2}],["Slow down and focus on precision",{ph:3,ob:3,pr:2}],["Split the work and coordinate with others",{si:3,le:3,ph:1}]]),
+Q("You're dropped in an unfamiliar city with no phone signal. What do you do?",[["Walk and explore until I get my bearings",{ex:4,ad:3}],["Find a map or landmark and navigate",{ex:3,ob:3,pl:2}],["Ask locals and make new connections",{si:4,co:2,ex:1}],["Stay calm and make a plan first",{rs:4,dm:3,pl:2}]]),
+Q("Your device or app suddenly stops working. What do you do?",[["Dig in and diagnose the cause myself",{tc:4,ps:3,ct:1}],["Search for others who've had the same issue",{la:3,tc:2,ps:2}],["Find a smarter setup so it never happens again",{in:3,tc:3,st:2}],["Ask someone who knows tech",{si:3,co:2,tc:1}]]),
+Q("Everything goes wrong at once on a busy day. How do you hold up?",[["Stay calm and take one problem at a time",{rs:4,dm:3,pl:1}],["Improvise and adapt on the fly",{ad:4,pf:2,dm:2}],["Take charge and tell everyone what to do",{le:4,dm:3,co:1}],["Lean on others and share the load",{si:4,co:2,rs:1}]]),
+Q("You unexpectedly receive a sum of money. What do you do with it?",[["Invest it in something that can grow",{en:4,nu:3,st:2}],["Put it into a plan with a budget",{nu:3,pl:4,or:2}],["Spend it on learning something valuable",{la:4,st:2,in:1}],["Fund something creative or adventurous",{cr:3,ex:3,ad:2}]]),
+Q("You're asked to perform or present in front of a crowd. How do you feel?",[["Excited — I come alive with an audience",{pf:4,co:3,rs:2}],["Ready, if I can prepare thoroughly",{pl:3,co:3,or:2}],["I'd rather tell it as a story than recite facts",{wr:3,pf:3,cr:2}],["I'd rather help from behind the scenes",{pr:3,or:2,ob:2,te:1}]]));
+AR.q.push(
+["مهمة جسدية بوقت محدد — حمل أو تسلّق أو إصلاح شيء. كيف تتعامل معها؟","أعتمد على التحمّل وأواصل","أبحث عن الأسلوب الأقل جهدًا","أتمهّل وأركّز على الدقة","أقسّم العمل وأنسّق مع الآخرين"],
+["تجد نفسك في مدينة غريبة بلا إشارة هاتف. ماذا تفعل؟","أمشي وأستكشف حتى أتعرّف على المكان","أبحث عن خريطة أو معلم وأتنقّل به","أسأل الناس وأتعرّف عليهم","أهدأ وأضع خطة أولًا"],
+["يتوقف جهازك أو تطبيقك فجأة عن العمل. ماذا تفعل؟","أغوص وأشخّص السبب بنفسي","أبحث عمّن واجه المشكلة نفسها","أجد ترتيبًا أذكى كي لا تتكرر","أسأل من يفهم في التقنية"],
+["في يوم مزدحم يسوء كل شيء دفعة واحدة. كيف تصمد؟","أهدأ وأحلّ مشكلة واحدة في كل مرة","أرتجل وأتكيّف على الفور","أتولّى القيادة وأوزّع المهام","أستعين بالآخرين ونتقاسم العبء"],
+["تحصل فجأة على مبلغ من المال. ماذا تفعل به؟","أستثمره في شيء يمكن أن ينمو","أضعه ضمن خطة وميزانية","أنفقه على تعلّم شيء قيّم","أموّل به شيئًا إبداعيًا أو مغامرة"],
+["طُلب منك أن تقدّم عرضًا أو تؤدّي أمام جمهور. كيف تشعر؟","متحمّس — أزداد حيوية بوجود جمهور","جاهز إذا استطعت التحضير جيدًا","أفضّل أن أحكيها كقصة لا كمجرد معلومات","أفضّل المساعدة من خلف الكواليس"]);
+/* Adaptive routing: TOP = topic of each question, GO = topic each answer leads to next */
+const TOP=["plan","think","people","learn","people","create","think","plan","people","plan","biz","people","hands","wild","tech","wild","biz","create"];
+const GO=[["plan","people","think","wild"],["tech","learn","create","people"],["biz","people","people","think"],["hands","learn","people","tech"],["people","think","wild","create"],["create","biz","hands","people"],["think","hands","tech","people"],["plan","create","wild","people"],["create","people","plan","hands"],["biz","plan","think","wild"],["biz","think","people","create"],["people","think","create","hands"],["wild","tech","create","people"],["learn","plan","people","think"],["think","learn","biz","people"],["plan","create","people","people"],["biz","plan","learn","wild"],["people","plan","create","hands"]];
+const SK=[[0,"Problem Solving","حل المشكلات","ps ct"],[0,"Critical Thinking","التفكير النقدي","ct"],[0,"Logical Thinking","التفكير المنطقي","ct ps"],[0,"Analytical Thinking","التفكير التحليلي","ct nu ob"],[0,"Strategic Thinking","التفكير الاستراتيجي","st pl"],[0,"Creative Thinking","التفكير الإبداعي","cr in"],[0,"Quick Thinking","التفكير السريع","dm ad"],[0,"Decision Making","اتخاذ القرار","dm"],[0,"Pattern Recognition","اكتشاف الأنماط","ob ct"],[0,"Reasoning","الاستدلال والاستنتاج","ct ps"],[0,"Lateral Thinking","التفكير خارج الصندوق","in cr"],[0,"Attention to Detail","الانتباه للتفاصيل","ob"],[0,"Observation","الملاحظة","ob"],[0,"Spatial Thinking","التصور المكاني","ob pr"],[0,"Numerical Thinking","التفكير الرياضي","nu"],[0,"Risk Assessment","تقييم المخاطر","ct dm nu"],[0,"Systems Thinking","التفكير المنهجي","st ps"],[1,"Communication","التواصل","co"],[1,"Public Speaking","التحدث أمام الجمهور","co pf"],[1,"Persuasion","الإقناع","pe"],[1,"Negotiation","التفاوض","pe dm"],[1,"Listening","الاستماع","si"],[1,"Explaining","شرح الأفكار","te"],[1,"Teaching","التعليم","te"],[1,"Relationship Building","بناء العلاقات","si co"],[1,"Teamwork","العمل الجماعي","si le"],[1,"Social Intelligence","الذكاء الاجتماعي","si"],[1,"Understanding People","فهم الآخرين","si ob"],[1,"Conflict Resolution","حل النزاعات","si dm"],[1,"Leadership","القيادة","le"],[1,"Influence","التأثير","pe le"],[1,"Empathy","التعاطف","si rs"],[1,"Written Communication","التواصل الكتابي","wr"],[1,"Self-Expression","التعبير عن الأفكار","wr cr"],[2,"Creativity","الإبداع","cr"],[2,"Idea Generation","توليد الأفكار","cr in"],[2,"Innovation","الابتكار","in"],[2,"Writing","الكتابة","wr"],[2,"Storytelling","رواية القصص","wr cr"],[2,"Drawing","الرسم","cr ob"],[2,"Design","التصميم","cr pr"],[2,"Photography","التصوير","ob cr"],[2,"Video Creation","صناعة الفيديو","cr tc"],[2,"Video Editing","المونتاج","cr tc pr"],[2,"Content Creation","صناعة المحتوى","cr wr"],[2,"Acting","التمثيل","pf"],[2,"Performance","الأداء","pf co"],[2,"Music","الموسيقى","pf cr"],[2,"Composition","التأليف","cr pf wr"],[2,"Imagination","التخيّل","cr"],[2,"Visual Sense","الذوق البصري","cr ob pr"],[2,"Concept Development","صياغة الأفكار","cr st"],[3,"Entrepreneurship","ريادة الأعمال","en"],[3,"Sales","البيع","pe en"],[3,"Marketing","التسويق","pe cr"],[3,"Branding","بناء العلامات التجارية","cr st"],[3,"Trading/Commerce","التجارة","en nu"],[3,"Money Management","إدارة المال","nu pl"],[3,"Financial Planning","التخطيط المالي","nu pl st"],[3,"Opportunity Recognition","اكتشاف الفرص","en ob"],[3,"Project Building","بناء المشاريع","en pr"],[3,"Project Management","إدارة المشاريع","pl or"],[3,"Resource Management","إدارة الموارد","or pl nu"],[3,"Customer Service","خدمة العملاء","si co"],[3,"Business Decision Making","اتخاذ القرارات التجارية","dm en"],[3,"Business Thinking","التفكير التجاري","en st"],[3,"Pricing","التسعير","nu en pe"],[3,"Risk Management","إدارة المخاطر","dm nu ct"],[4,"Learning Speed","سرعة التعلم","la"],[4,"Self-Learning","التعلم الذاتي","la rs"],[4,"Memory","حفظ المعلومات","la ob"],[4,"Research","البحث","la ct"],[4,"Questioning","طرح الأسئلة","ct la"],[4,"Curiosity","الفضول","la ex"],[4,"Information Processing","فهم المعلومات","la ct ob"],[4,"Knowledge Application","تطبيق المعرفة","pr la"],[4,"Focus","التركيز","rs pl"],[4,"Consistency","الاستمرارية","rs or"],[4,"Adapting to New Information","التكيف مع المعلومات الجديدة","ad la"],[4,"Self-Education","تعليم النفس","la en"],[5,"Planning","التخطيط","pl"],[5,"Organization","التنظيم","or"],[5,"Time Management","إدارة الوقت","or pl"],[5,"Prioritization","تحديد الأولويات","dm pl"],[5,"Discipline","الالتزام","rs or"],[5,"Task Management","إدارة المهام","or pr"],[5,"Execution","تنفيذ الأفكار","pr or en"],[5,"Goal Setting","تحديد الأهداف","pl st"],[5,"Follow-through","المتابعة","rs or pl"],[5,"Personal Resource Management","إدارة الموارد الشخصية","or nu"],[6,"Manual Skills","المهارات اليدوية","pr ph"],[6,"Repair Skills","إصلاح الأشياء","pr ps"],[6,"Building & Assembly","البناء والتركيب","pr ph"],[6,"Tool Handling","استخدام الأدوات","pr ob"],[6,"Cooking","الطبخ","pr cr ad"],[6,"Gardening","البستنة","pr rs"],[6,"Household Skills","الأعمال المنزلية","or pr"],[6,"Practical Technology","التعامل مع الأجهزة","tc pr"],[6,"Spatial Organization","التنسيق والترتيب","or ob cr"],[6,"Mechanical Thinking","المهارات الميكانيكية","pr ps ob"],[7,"Balance","التوازن","ph"],[7,"Hand-Eye Coordination","التنسيق بين العين واليد","ph ob"],[7,"Reaction Speed","سرعة الاستجابة","ph dm"],[7,"Agility","الرشاقة","ph ad"],[7,"Motor Precision","الدقة الحركية","ph pr"],[7,"Physical Endurance","التحمل البدني","ph rs"],[7,"Physical Strength","القوة البدنية","ph"],[7,"Coordination","التناسق الحركي","ph pf"],[7,"Body Awareness","الوعي الجسدي","ph ob"],[8,"Independence","الاستقلالية","rs ad"],[8,"Adaptability","التكيف","ad"],[8,"Stress Management","التعامل مع الضغوط","rs"],[8,"Resilience","المرونة","rs ad"],[8,"Patience","الصبر","rs si"],[8,"Self-Control","ضبط النفس","rs dm"],[8,"Initiative","المبادرة","en dm"],[8,"Responsibility","تحمل المسؤولية","or rs le"],[8,"Self-Reliance","الاعتماد على النفس","rs pr"],[8,"Situational Adaptability","التعامل مع المواقف الجديدة","ad ob"],[8,"Crisis Management","إدارة الأزمات","dm rs le"],[9,"Exploration","الاستكشاف","ex"],[9,"Navigation","الملاحة","ex ob pl"],[9,"Map Reading","قراءة الخرائط","ex ob"],[9,"Decisions in Unfamiliar Situations","اتخاذ القرارات في المواقف غير المألوفة","ex dm"],[9,"Adapting to New Environments","سرعة التكيف مع البيئات الجديدة","ex ad"],[9,"Discovering Places & Opportunities","اكتشاف الأماكن والفرص","ex en"],[9,"Boldness in Trying New Things","الجرأة في تجربة الأشياء الجديدة","ex ad en"],[10,"Programming","البرمجة","tc ps"],[10,"Computational Thinking","التفكير الحاسوبي","tc ct"],[10,"Technology Literacy","التعامل مع التكنولوجيا","tc la"],[10,"Data Analysis","تحليل البيانات","nu tc ct"],[10,"Cybersecurity Thinking","الأمن السيبراني","tc ct"],[10,"Digital Skills","استخدام الأدوات الرقمية","tc"],[10,"Automation Thinking","الأتمتة","tc in"],[10,"Technical Troubleshooting","حل المشاكل التقنية","tc ps"],[10,"Systems Design","تصميم الأنظمة","tc st"],[11,"Intuition","الحدس","ob dm"],[11,"Situational Awareness","قراءة المواقف","ob si"],[11,"Body Language Awareness","قراءة لغة الجسد","si ob"],[11,"Wit","سرعة البديهة","ad co"],[11,"Improvisation","الارتجال","ad pf"],[11,"Composure","الهدوء تحت الضغط","rs"],[11,"Assertiveness","الجرأة في التعبير","co pe"],[11,"Communication Confidence","الثقة في التواصل","co pe"],[11,"Big-Picture Thinking","القدرة على رؤية الصورة الكبيرة","st"],[11,"Detail Orientation","القدرة على رؤية التفاصيل","ob or"],[11,"Leadership Initiative","المبادرة القيادية","le en"],[11,"Spotting Others' Strengths","اكتشاف نقاط القوة لدى الآخرين","si le"],[11,"Motivation","تحفيز الآخرين","le si"],[11,"Practical Solution Building","بناء الحلول","ps pr"]],DOM=[["🧠 Thinking & Analysis","🧠 التفكير والتحليل"],["💬 Communication & People","💬 التواصل والناس"],["🎨 Creativity & Content","🎨 الإبداع وصناعة المحتوى"],["💼 Business & Money","💼 الأعمال والمال"],["📚 Learning","📚 التعلّم"],["🎯 Organization & Execution","🎯 التنظيم والتنفيذ"],["🛠️ Practical Skills","🛠️ المهارات العملية"],["🏃 Physical Skills","🏃 المهارات الجسدية"],["🌍 Life & Adaptation","🌍 الحياة والتكيّف"],["🧭 Exploration & Adventure","🧭 الاستكشاف والمغامرة"],["💻 Technical Skills","💻 المهارات التقنية"],["✨ Distinctive Personal Skills","✨ مهارات شخصية مميزة"]],JOBS=[["Doctor","طبيب","ct ps rs",0],["Dentist","طبيب أسنان","pr ob ph",0],["Pharmacist","صيدلي","la ct or",0],["Nurse","ممرض","si rs te",0],["Physical Therapist","أخصائي علاج طبيعي","ph te si",0],["Nutritionist","أخصائي تغذية","te la si",0],["Lab Specialist","أخصائي مختبرات","ob ct or",0],["Radiology Specialist","أخصائي أشعة","ob tc ct",0],["Veterinarian","طبيب بيطري","ct si pr",0],["Public Health Specialist","أخصائي صحة عامة","st nu co",0],["Biologist","عالم أحياء","ob la ct",0],["Chemist","عالم كيمياء","ct pr nu",0],["Physicist","عالم فيزياء","nu ct ps",0],["Astronomer","عالم فلك","ob nu ex",0],["Researcher","باحث","la ct ob",0],["Neuroscientist","عالم أعصاب","la ct ob",0],["Medical Researcher","باحث طبي","la ct si",0],["Environmental Scientist","عالم بيئة","ob ex st",0],["Geologist","عالم جيولوجيا","ex ob ct",0],["Teacher","مدرس","te co si",5],["University Professor","أستاذ جامعي","te la ct",5],["Trainer","مدرب","te co le",5],["Private Tutor","مدرس خصوصي","te si la",5],["Academic Advisor","مرشد أكاديمي","si te pl",5],["Career Coach","مدرب مهني","te le si",5],["Educational Content Creator","صانع محتوى تعليمي","te cr wr",5],["Social Worker","أخصائي اجتماعي","si rs te",5],["Counselor","مستشار","si te co",5],["HR Specialist","أخصائي موارد بشرية","si or co",5],["Mentor","مرشد","te si le",5],["Psychologist","أخصائي نفسي","si ob rs",5],["Community Relations Officer","مسؤول علاقات مجتمعية","co si pe",5],["Nonprofit Director","مدير مؤسسة غير ربحية","le st si",5],["Software Engineer","مهندس برمجيات","tc ps ct",1],["AI Engineer","مهندس ذكاء اصطناعي","tc in nu",1],["Computer Engineer","مهندس حاسوب","tc pr ps",1],["Network Engineer","مهندس شبكات","tc ps or",1],["Cybersecurity Engineer","مهندس أمن سيبراني","tc ct ob",1],["Web Developer","مطور ويب","tc cr ps",1],["App Developer","مطور تطبيقات","tc ps in",1],["Data Analyst","محلل بيانات","nu ct tc",1],["Data Scientist","عالم بيانات","nu tc la",1],["DevOps Engineer","مهندس DevOps","tc or ps",1],["Robotics Engineer","مهندس روبوتات","tc pr in",1],["Electrical Engineer","مهندس كهرباء","pr nu ps",1],["Mechanical Engineer","مهندس ميكانيك","pr ps nu",1],["Civil Engineer","مهندس مدني","pr nu pl",1],["Architect","مهندس معماري","cr pr pl",1],["Aerospace Engineer","مهندس طيران","ps nu tc",1],["Game Developer","مطور ألعاب","tc cr ps",1],["AI Specialist","متخصص AI","tc la in",1],["Prompt Engineer","Prompt Engineer","wr tc ct",1],["Entrepreneur","رائد أعمال","en dm st",2],["Company Director","مدير شركة","le dm st",2],["Project Manager","مدير مشاريع","pl or le",2],["Product Manager","مدير منتجات","dm in st",2],["Business Consultant","مستشار أعمال","st ps co",2],["Business Analyst","محلل أعمال","ct nu co",2],["Operations Manager","مدير عمليات","or pl dm",2],["Sales Manager","مدير مبيعات","pe le co",2],["Marketing Manager","مدير تسويق","pe cr st",2],["HR Manager","مدير موارد بشرية","si le or",2],["Business Development Officer","مسؤول تطوير أعمال","en pe co",2],["Accountant","محاسب","nu or ct",2],["Financial Analyst","محلل مالي","nu ct st",2],["Economist","اقتصادي","nu st ct",2],["Financial Advisor","مستشار مالي","nu si pe",2],["Banker","مصرفي","nu pe or",2],["Investment Analyst","محلل استثمار","nu st dm",2],["Finance Director","مدير مالي","nu dm le",2],["Tax Expert","خبير ضرائب","nu ct or",2],["Salesperson","بائع","pe co si",2],["Store Manager","مدير متجر","le or pe",2],["Merchant","تاجر","en nu pe",2],["Real Estate Agent","وسيط عقاري","pe en si",2],["E-commerce Manager","مدير تجارة إلكترونية","en tc pe",2],["Procurement Officer","مسؤول مشتريات","nu or pe",2],["Digital Marketing Specialist","متخصص تسويق رقمي","pe cr tc",2],["Manager","مدير","le or dm",2],["Project Coordinator","منسق مشاريع","or pl co",2],["Administrative Assistant","مساعد إداري","or co pl",2],["Resource Manager","مدير موارد","or pl nu",2],["Planner","مخطط","pl st or",2],["Quality Officer","مسؤول جودة","ob or ct",2],["Lawyer","محامي","ct pe wr",3],["Judge","قاضٍ","ct dm rs",3],["Legal Advisor","مستشار قانوني","ct wr si",3],["Legal Researcher","باحث قانوني","la ct wr",3],["Diplomat","دبلوماسي","co pe si",3],["Government Employee","موظف حكومي","or pl rs",3],["Public Policy Analyst","محلل سياسات عامة","ct st nu",3],["Investigator","محقق","ob ct ps",3],["Forensic Analyst","محلل جنائي","ob ct pr",3],["Intelligence Analyst","محلل استخبارات","ct ob st",3],["Auditor","مدقق","ob ct or",3],["Risk Analyst","محلل مخاطر","ct nu dm",3],["Security Analyst","محلل أمن","ob ct tc",3],["Graphic Designer","مصمم جرافيك","cr ob pr",4],["UI/UX Designer","مصمم UI/UX","cr si ps",4],["Photographer","مصور","ob cr tc",4],["Director","مخرج","cr le pf",4],["Video Editor","محرر فيديو","cr tc pr",4],["Writer","كاتب","wr cr ob",4],["Author","مؤلف","wr cr in",4],["Journalist","صحفي","wr co ob",4],["Creative Director","مخرج إبداعي","cr le st",4],["Fashion Designer","مصمم أزياء","cr ob pr",4],["Illustrator","رسام","cr ob pf",4],["Product Designer","مصمم منتجات","cr pr in",4],["Broadcaster","مذيع","pf co pe",4],["TV Host","مقدم برامج","pf co ad",4],["Reporter","مراسل","co ex wr",4],["PR Manager","مدير علاقات عامة","co pe si",4],["Media Officer","مسؤول إعلام","co wr or",4],["Content Writer","كاتب محتوى","wr cr co",4],["Social Media Manager","مدير وسائل التواصل الاجتماعي","co cr pl",4],["Official Spokesperson","متحدث رسمي","co pe rs",4],["Content Creator","صانع محتوى","cr wr pf",4],["Digital Influencer","مؤثر رقمي","pf co en",4],["Streamer","Streamer","pf co ad",4],["Game Designer","مصمم ألعاب","cr in st",4],["VR/AR Experience Designer","مصمم تجارب VR/AR","cr tc in",4],["Creator","Creator","cr in en",4],["Product Creator","Product Creator","in en pr",4],["Electrician","كهربائي","pr ps ph",6],["Mechanic","ميكانيكي","pr ps ob",6],["Maintenance Technician","فني صيانة","pr ps or",6],["Carpenter","نجار","pr cr ph",6],["Blacksmith","حداد","pr ph cr",6],["Electronics Technician","فني إلكترونيات","pr tc ob",6],["HVAC Technician","فني تكييف","pr ps ph",6],["Network Technician","فني شبكات","tc pr ps",6],["Auto Technician","فني سيارات","pr ps ob",6],["Chef","طباخ / شيف","pr cr ad",6],["Pilot","طيار","dm rs tc",6],["Air Traffic Controller","مراقب جوي","ob dm rs",6],["Flight Attendant","مضيف طيران","si ad rs",6],["Tour Guide","مرشد سياحي","co ex te",6],["Tourism Manager","مدير سياحة","le pl co",6],["Travel Specialist","متخصص سفر وسياحة","ex co pl",6],["Interior Designer","مصمم داخلي","cr ob pr",6],["Surveyor","مسّاح","ob nu ex",6],["Urban Planner","مخطط مدن","st pl cr",6],["Construction Project Manager","مدير مشاريع إنشائية","pl le or",6],["Landscape Designer","مصمم حدائق","cr pr ob",6],["Athlete","لاعب رياضي","ph rs ad",6],["Sports Coach","مدرب رياضي","ph te le",6],["Referee","حكم","dm ob rs",6],["Sports Analyst","محلل رياضي","nu ob co",6],["Fitness Trainer","مدرب لياقة","ph te rs",6],["Sports Performance Specialist","أخصائي أداء رياضي","ph nu te",6]];
+questions.push(...[{"q":"Which kind of challenge would you enjoy working on most?","a":[["Understanding how bodies, nature, or the universe work",{"ct":4,"ob":3,"la":2}],["Building systems, machines, or software that work",{"tc":4,"ps":3,"nu":2}],["Growing a business, handling money, or running operations",{"or":4,"nu":3,"pe":3}],["Weighing evidence, rules, and fairness to find the truth",{"ct":4,"ob":2,"wr":1}],["Creating stories, visuals, or experiences people feel",{"cr":4,"co":3,"pf":2}],["Helping people learn, heal, or find their way",{"si":4,"te":4,"co":2}],["Working with your hands, outdoors, or on the move",{"pr":4,"ob":3,"ph":3}]]},{"q":"Which of these sounds most like your kind of day?","a":[["Diagnosing what's wrong and deciding on a treatment",{"ct":4,"ps":2,"rs":2},[0,8]],["Working precisely with my hands on something delicate",{"ph":4,"pr":2,"ob":2},[1,4]],["Caring for people through recovery, one by one",{"si":4,"te":4,"rs":1},[3,4,5]],["Analyzing samples, scans, or data behind the scenes",{"ct":4,"ob":3,"or":3},[6,7,2]],["Running experiments to discover something new",{"la":4,"ct":4,"ob":3},[14,16,15,10]]]},{"q":"What do you most enjoy building?","a":[["Apps, websites, or games people use",{"tc":4,"ps":4,"cr":2},[38,39,33,49]],["Smart systems that learn from data",{"tc":4,"nu":2,"in":2},[34,41,50,40,51]],["Networks and defenses that keep things safe",{"tc":4,"ps":3,"or":2},[36,37,42,35]],["Machines, circuits, and robots",{"pr":4,"nu":4,"ps":4},[43,44,45,48]],["Buildings and structures",{"pr":4,"pl":4,"nu":2},[46,47]]]},{"q":"Which role pulls you most?","a":[["Starting something of my own",{"en":4,"pe":3,"dm":1},[52,62,73]],["Leading a team toward a goal",{"le":4,"dm":4,"or":4},[53,54,78,58]],["Working with numbers and money",{"nu":4,"ct":2,"or":2},[63,64,66,67,68,65,69,70]],["Winning customers and closing deals",{"pe":4,"co":2,"si":2},[71,59,74,72,60]],["Keeping everything organized and running",{"or":4,"pl":2,"co":2},[79,80,83,76,82]]]},{"q":"Which of these draws you most?","a":[["Arguing a case and standing up for someone",{"ct":4,"wr":4,"pe":2},[84,86]],["Deciding fairly between two sides",{"ct":4,"dm":2,"rs":2},[85,87]],["Shaping or representing a country's choices",{"co":4,"pe":4,"si":4},[88,90,89]],["Digging for the truth behind a puzzle",{"ob":4,"ct":4,"ps":1},[91,92,93]],["Checking that systems, accounts and risks are sound",{"ct":4,"ob":3,"or":1},[94,95,96]]]},{"q":"How do you like to express yourself?","a":[["Through images and design",{"cr":4,"ob":2,"pr":2},[97,98,108,107,106]],["Through camera and motion",{"cr":4,"tc":3,"ob":1},[99,100,101]],["Through words and stories",{"wr":4,"cr":3,"ob":2},[102,103,104,114]],["Through my voice and presence",{"co":4,"pf":3,"pe":2},[109,110,116,119,118]],["Through new digital worlds",{"cr":4,"in":3,"st":1},[120,121,117,122]]]},{"q":"How do you like to help people?","a":[["Teaching them something new",{"te":4,"si":2,"la":2},[19,20,22,25]],["Coaching them toward their goals",{"te":4,"le":3,"si":3},[21,24,23,29]],["Listening and supporting them through hard times",{"si":4,"rs":3,"te":3},[30,26,27]],["Connecting people with resources and each other",{"si":4,"co":4,"or":2},[28,31]],["Leading a cause bigger than myself",{"si":4,"le":2,"st":2},[32,31]]]},{"q":"Where do you picture yourself working?","a":[["In a workshop, fixing or crafting things",{"pr":4,"ps":3,"ph":2},[124,125,127,128,126,132,130,129,131]],["In a kitchen, creating something delicious",{"pr":4,"cr":4,"ad":4},[133]],["On a site, designing and building spaces",{"cr":4,"ob":4,"pr":3},[140,141,142,143,144]],["In the sky or on the road, moving people",{"rs":4,"co":4,"dm":3},[134,135,136,137,138,139]],["On the field, training or competing",{"ph":4,"rs":3,"te":3},[145,146,147,148,149,150]]]},{"q":"What matters most to you in this kind of work?","a":[["A direct impact on someone's life",{"rs":4,"ct":2,"ps":2},[0,3,1]],["Protecting the health of whole communities or the planet",{"st":4,"nu":2,"co":2},[9,17,5]],["Understanding the deepest 'why' of nature",{"nu":4,"ct":4,"ob":3},[12,13,11,10]],["Discovering things out in the real world",{"ex":4,"ob":4,"ct":4},[18,17,8]]]},{"q":"When a project gets hard, what do you do?","a":[["Dig into the logic until it's solved",{"tc":4,"ps":3,"ct":3},[33,37,35]],["Look at the numbers for the pattern",{"nu":4,"tc":4,"ct":1},[40,41,34]],["Sketch and prototype something physical",{"pr":4,"ps":2,"nu":2},[43,45,47,44]],["Make it smoother for the user",{"tc":4,"ps":4,"cr":3},[38,39,49]]]},{"q":"A new idea comes up. What's your first move?","a":[["Test whether it can make money",{"dm":4,"st":4,"nu":4},[52,57,68]],["Plan who does what",{"pl":4,"or":4,"le":1},[54,58,79]],["Craft the pitch to sell it",{"pe":4,"cr":2,"tc":2},[60,59,77,75]],["Check the risks and costs",{"nu":4,"or":4,"ct":4},[63,69,70,83]]]},{"q":"What's your strongest tool?","a":[["Words and persuasion",{"pe":4,"ct":2,"wr":2},[84,88]],["Calm, balanced judgment",{"ct":4,"dm":2,"rs":2},[85,90]],["Spotting tiny details",{"ob":4,"ct":4,"ps":1},[91,92,94]],["Seeing the big threat picture",{"ct":4,"ob":3,"st":1},[93,96,95]]]},{"q":"What do you want your work to do?","a":[["Tell the truth and inform people",{"wr":4,"co":3,"ob":3},[104,111,102]],["Shape how a brand or person is seen",{"co":4,"cr":3,"pe":1},[112,113,115,105]],["Entertain and build an audience",{"pf":4,"co":3,"ad":2},[118,119,110,117]],["Make beautiful, useful things",{"pr":4,"cr":3,"in":2},[108,106,97,123]]]},{"q":"When do you feel most rewarded?","a":[["When someone finally 'gets it'",{"te":4,"si":2,"la":2},[19,22,25,20]],["When someone reaches a goal because of me",{"te":4,"le":3,"si":3},[21,24,29,23]],["When someone feels truly understood",{"si":4,"rs":3,"te":3},[30,27,26]],["When a group works better together",{"si":4,"co":3,"or":1},[28,32,31]]]},{"q":"What energizes you most?","a":[["Solving a technical fault",{"pr":4,"ps":3,"ob":2},[126,125,124,129,130,132]],["Pressure and split-second decisions",{"rs":4,"dm":3,"ob":2},[134,135,147,145]],["Meeting new people and places",{"co":4,"ex":3,"pl":3},[137,136,139,138]],["Planning and shaping a space",{"cr":4,"ob":4,"pr":3},[140,142,143,141,144]]]}]);
+AR.q.push(...[["أي نوع من التحديات تستمتع بالعمل عليه أكثر؟","فهم كيف تعمل الأجسام والطبيعة والكون","بناء أنظمة أو آلات أو برامج تعمل بكفاءة","تنمية عمل تجاري أو التعامل مع المال أو إدارة العمليات","وزن الأدلة والقواعد والعدالة للوصول إلى الحقيقة","صناعة قصص وصور وتجارب يشعر بها الناس","مساعدة الناس على التعلّم أو التعافي أو إيجاد طريقهم","العمل بيديك أو في الميدان أو التنقّل"],["أيٌّ من هذه الأيام يشبهك أكثر؟","أشخّص المشكلة وأقرر العلاج","أعمل بدقة بيدي على شيء حساس","أرعى الناس خلال تعافيهم واحدًا واحدًا","أحلّل عيّنات أو صورًا أو بيانات خلف الكواليس","أجري تجارب لاكتشاف شيء جديد"],["ما الذي تستمتع ببنائه أكثر؟","تطبيقات أو مواقع أو ألعاب يستخدمها الناس","أنظمة ذكية تتعلم من البيانات","شبكات ودفاعات تحافظ على الأمان","آلات ودوائر وروبوتات","مبانٍ وإنشاءات"],["أي دور يجذبك أكثر؟","أبدأ مشروعًا خاصًا بي","أقود فريقًا نحو هدف","أعمل مع الأرقام والمال","أكسب العملاء وأُتمّ الصفقات","أُبقي كل شيء منظمًا وسائرًا"],["أيٌّ من هذه يجذبك أكثر؟","أترافع عن قضية وأدافع عن شخص","أحكم بإنصاف بين طرفين","أصوغ خيارات دولة أو أمثّلها","أنقّب عن الحقيقة وراء لغز","أتحقق من سلامة الأنظمة والحسابات والمخاطر"],["كيف تحب أن تعبّر عن نفسك؟","بالصور والتصميم","بالكاميرا والحركة","بالكلمات والقصص","بصوتي وحضوري","بعوالم رقمية جديدة"],["كيف تحب أن تساعد الناس؟","أعلّمهم شيئًا جديدًا","أرشدهم نحو أهدافهم","أُصغي وأسندهم في الأوقات الصعبة","أصل الناس بالموارد وببعضهم","أقود قضية أكبر مني"],["أين تتخيل نفسك تعمل؟","في ورشة أُصلح أو أصنع","في مطبخ أبتكر شيئًا لذيذًا","في موقع أصمّم الأماكن وأبنيها","في السماء أو على الطريق أنقل الناس","في الميدان أتدرّب أو أنافس"],["ما أهم شيء لك في هذا النوع من العمل؟","أثر مباشر في حياة شخص ما","حماية صحة المجتمعات أو الكوكب","فهم «لماذا» الأعمق في الطبيعة","اكتشاف أشياء في الميدان"],["حين يصعب المشروع، ماذا تفعل؟","أغوص في المنطق حتى أحلّها","أنظر إلى الأرقام بحثًا عن النمط","أرسم وأصنع نموذجًا ملموسًا","أجعله أسهل للمستخدم"],["تظهر فكرة جديدة. ما خطوتك الأولى؟","أختبر إن كانت تربح","أخطط من سيفعل ماذا","أصيغ العرض لبيعها","أفحص المخاطر والتكاليف"],["ما أقوى أداة لديك؟","الكلمات والإقناع","حُكم هادئ ومتوازن","ملاحظة أدق التفاصيل","رؤية صورة التهديد الكبيرة"],["ماذا تريد أن يفعل عملك؟","يقول الحقيقة ويُطلع الناس","يصوغ نظرة الناس إلى علامة أو شخص","يسلّي ويبني جمهورًا","يصنع أشياء جميلة ومفيدة"],["متى تشعر بأكبر قدر من الرضا؟","حين يفهم أحدهم أخيرًا","حين يبلغ أحدهم هدفه بسببي","حين يشعر أحدهم أنه مفهوم حقًا","حين تعمل مجموعة بشكل أفضل معًا"],["ما الذي يمنحك أكبر طاقة؟","حلّ عطل تقني","الضغط والقرارات اللحظية","لقاء ناس وأماكن جديدة","تخطيط المكان وتشكيله"]]);
+const CT=["people","tech","biz","think","create","people","hands"];
+/* 10 questions, 4 answers each: group -> cluster -> cluster-narrowing, then smart picks */
+questions[18]={"q":"Which kind of challenge would you enjoy working on most?","a":[["Understanding how bodies, nature, or the universe work",{"ct":4,"ob":3,"la":2}],["Building systems, machines, or things that work",{"tc":4,"pr":4,"ps":4}],["Growing a business, handling money, or applying rules and fairness",{"ct":4,"or":4,"nu":3}],["Creating experiences, or helping people learn, heal and grow",{"cr":4,"co":4,"si":3}]]};AR.q[18]=["أي نوع من التحديات تستمتع بالعمل عليه أكثر؟","فهم كيف تعمل الأجسام والطبيعة والكون","بناء أنظمة أو آلات أو أشياء تعمل بكفاءة","تنمية عمل أو إدارة المال أو تطبيق القواعد والعدالة","صناعة تجارب أو مساعدة الناس على التعلّم والتعافي والنمو"];
+questions.push(...[{"q":"What do you most like making or doing?","a":[["Writing code or designing smart systems",{"tc":4,"ps":2,"ct":2},[33,38,34,40]],["Engineering machines, circuits, or buildings",{"pr":4,"nu":3,"ps":2},[45,44,46,47]],["Fixing, crafting, or cooking with my hands",{"pr":4,"ps":2,"ph":2},[124,125,127,133]],["Moving people, guiding, shaping spaces, or competing",{"rs":4,"dm":2,"tc":2},[134,137,140,145]]]},{"q":"What kind of work do you picture yourself doing?","a":[["Starting and growing a business",{"en":4,"dm":3,"st":3},[52,62,53,73]],["Managing money, numbers, or operations",{"or":4,"nu":3,"ct":3},[63,64,58,54]],["Arguing cases, advising, or representing others",{"ct":4,"pe":3,"wr":3},[84,86,85,88]],["Investigating, auditing, or analyzing risks",{"ct":4,"ob":3,"ps":1},[91,94,95,93]]]},{"q":"How would you most like to affect people?","a":[["Move them with images, words, or performance",{"cr":4,"ob":4,"pr":1},[97,102,109,99]],["Entertain them or build an online audience",{"pf":4,"co":3,"cr":3},[118,119,117,120]],["Teach them and help them learn",{"te":4,"co":2,"si":2},[19,20,21,22]],["Support them emotionally or lead a cause",{"si":4,"rs":2,"te":2},[30,26,27,32]]]}]);AR.q.push(...[["ما الذي تحب صنعه أو فعله أكثر؟","أكتب كودًا أو أصمّم أنظمة ذكية","أهندس آلات ودوائر ومبانٍ","أُصلح أو أصنع أو أطبخ بيدي","أنقل الناس أو أرشدهم أو أشكّل الأماكن أو أنافس"],["أي نوع من العمل تتخيل نفسك تؤديه؟","أبدأ عملًا وأنمّيه","أدير المال والأرقام أو العمليات","أترافع وأستشير وأمثّل الآخرين","أحقق وأدقق وأحلّل المخاطر"],["كيف تحب أن تؤثّر في الناس؟","أحرّكهم بالصور أو الكلمات أو الأداء","أسلّيهم أو أبني جمهورًا على الإنترنت","أعلّمهم وأساعدهم على التعلّم","أسندهم نفسيًا أو أقود قضية"]]);
+const GC=[[0],[1,1,6,6],[2,2,3,3],[4,4,5,5]];
+const clusterOf=(p,pk)=>pk[0]===0?0:GC[pk[0]][pk[1]];
+function mergeA(qi,keep,drop,en,ar){const q=questions[qi],a=q.a[keep],b=q.a[drop];a[0]=en;a[2]=[...new Set([...(a[2]||[]),...(b[2]||[])])];for(const k in b[1])a[1][k]=Math.max(a[1][k]||0,b[1][k]);q.a.splice(drop,1);AR.q[qi][keep+1]=ar;AR.q[qi].splice(drop+1,1);}
+mergeA(19,3,4,"Analyzing samples and scans, or running experiments","أحلّل عيّنات وصورًا أو أجري تجارب");
+mergeA(20,3,4,"Machines, robots, or buildings","آلات وروبوتات أو مبانٍ");
+mergeA(21,1,4,"Leading a team and keeping everything running","أقود فريقًا وأُبقي كل شيء سائرًا");
+mergeA(22,3,4,"Digging for the truth, or checking risks and accounts","أنقّب عن الحقيقة أو أفحص المخاطر والحسابات");
+mergeA(23,0,1,"Through images, design, or the camera","بالصور والتصميم والكاميرا");
+mergeA(24,3,4,"Connecting people and leading causes","أصل الناس ببعضهم وأقود قضايا");
+mergeA(25,0,1,"In a workshop or kitchen, crafting things","في ورشة أو مطبخ أصنع وأبتكر");
+/* Question banks: each run builds fresh questions of different patterns from these */
+const BANKS=[{"en":"Which word attracts you most?","ar":"أي كلمة تجذبك أكثر؟","items":[["Logic","المنطق","ct ps"],["Design","التصميم","cr pr"],["Story","الحكاية","wr cr"],["Strategy","الاستراتيجية","st pl"],["Healing","الشفاء","si rs"],["Growth","النمو","en st"],["Precision","الدقة","ob pr"],["Freedom","الحرية","ex ad"],["Order","النظام","or pl"],["Influence","التأثير","pe le"],["Discovery","الاكتشاف","la ex"],["Craft","الحِرفة","pr ph"],["Stage","المسرح","pf co"],["Numbers","الأرقام","nu ct"],["Code","الكود","tc ps"],["Justice","العدالة","ct dm"],["Teaching","التعليم","te si"],["Speed","السرعة","dm ad"],["Trust","الثقة","si co"],["Innovation","الابتكار","in cr"],["Endurance","التحمّل","ph rs"],["Teamwork","العمل الجماعي","le si"],["Truth","الحقيقة","ob ct"],["Adventure","المغامرة","ex en"]]},{"en":"It's a free afternoon. What do you pick?","ar":"عصر يوم فراغ. ماذا تختار؟","items":[["Take apart a gadget to see how it works","أفكّك جهازًا لأعرف كيف يعمل","pr ps"],["Sketch, paint, or design something","أرسم أو أصمّم شيئًا","cr ob"],["Write a story or journal","أكتب قصة أو يوميات","wr cr"],["Plan a trip down to the details","أخطط رحلة بكل تفاصيلها","pl ex"],["Help a friend sort out a problem","أساعد صديقًا في حل مشكلة","si te"],["Play a strategy game or puzzle","ألعب لعبة استراتيجية أو أحجية","st ps"],["Work out or play a sport","أتمرّن أو ألعب رياضة","ph rs"],["Start a small side project to earn money","أبدأ مشروعًا صغيرًا للربح","en pe"],["Learn a new skill online","أتعلّم مهارة جديدة عبر الإنترنت","la tc"],["Cook something new","أطبخ شيئًا جديدًا","pr cr"],["Organize my space and my week","أرتّب مكاني وأسبوعي","or pl"],["Explore somewhere I've never been","أستكشف مكانًا لم أزره","ex ad"],["Debate an idea with friends","أناقش فكرة مع أصدقائي","ct pe"],["Record or edit a video","أصوّر أو أُحرّر فيديو","cr tc"],["Analyze numbers or a budget","أحلّل أرقامًا أو ميزانية","nu ct"],["Perform music or act","أعزف أو أمثّل","pf cr"],["Teach someone something I know","أعلّم أحدهم شيئًا أعرفه","te co"],["Observe people and guess what they feel","أراقب الناس وأخمّن ما يشعرون به","ob si"],["Volunteer for a cause","أتطوع من أجل قضية","le si"],["Garden or fix things at home","أعتني بحديقة أو أصلح شيئًا في البيت","pr rs"]]},{"en":"In a group project, which job do you grab?","ar":"في مشروع جماعي، أي مهمة تأخذها؟","items":[["Be the leader who sets direction","أقود وأحدد الاتجاه","le dm"],["Do the research and gather facts","أبحث وأجمع الحقائق","la ct"],["Design how it looks","أصمّم شكله","cr pr"],["Present it to the audience","أقدّمه للجمهور","co pf"],["Keep the schedule and the checklist","أُبقي الجدول وقائمة المهام","or pl"],["Crunch the numbers","أحسب الأرقام","nu ct"],["Write the report","أكتب التقرير","wr co"],["Build the technical part","أبني الجزء التقني","tc ps"],["Keep the team motivated and united","أحفّز الفريق وأوحّده","si le"],["Find the budget and the buyers","أؤمّن الميزانية والعملاء","en pe"],["Fix whatever breaks","أصلح أي عطل يظهر","pr ps"],["Come up with the big idea","أبتكر الفكرة الكبيرة","in cr"],["Spot mistakes and test quality","ألتقط الأخطاء وأختبر الجودة","ob ct"],["Teach the others how to do it","أعلّم الآخرين كيف يفعلونه","te si"],["Handle conflicts between people","أحلّ الخلافات بين الأفراد","si dm"],["Negotiate with outsiders","أتفاوض مع الجهات الخارجية","pe co"],["Make the risky call under pressure","أتخذ القرار الجريء تحت الضغط","dm rs"],["Scout new opportunities","أستكشف فرصًا جديدة","ex en"]]},{"en":"What would your friends say you're best at?","ar":"بماذا سيقول أصدقاؤك إنك الأفضل؟","items":[["Staying calm when everyone panics","الهدوء حين يفزع الجميع","rs dm"],["Explaining things so they finally click","الشرح حتى يفهم الجميع","te co"],["Spotting what others miss","ملاحظة ما يفوت الآخرين","ob ct"],["Coming up with wild ideas","ابتكار أفكار جامحة","cr in"],["Making people feel understood","جعل الناس يشعرون بأنهم مفهومون","si co"],["Getting things done on time","إنجاز الأمور في وقتها","or pl"],["Convincing anyone of anything","إقناع أي شخص بأي شيء","pe co"],["Fixing things with my hands","إصلاح الأشياء بيدي","pr ph"],["Being great with numbers","التفوّق مع الأرقام","nu ct"],["Making any plan work","إنجاح أي خطة","st pl"],["Telling a great story","سرد قصة رائعة","wr pf"],["Learning fast","التعلّم بسرعة","la ad"],["Taking charge","تولّي القيادة","le dm"],["Finding a way when nothing works","إيجاد طريقة حين لا شيء ينجح","ps ad"],["Seeing business opportunities","رؤية فرص الأعمال","en ob"],["Being physically tough","القوة والتحمّل الجسدي","ph rs"],["Being at ease with technology","الارتياح مع التقنية","tc la"],["Making things beautiful","جعل الأشياء جميلة","cr ob"]]},{"en":"Pick the headline about you ten years from now","ar":"اختر العنوان الذي يخصّك بعد عشر سنوات","items":[["Local team builds a company that employs hundreds","فريق محلي يبني شركة توظّف المئات","en le"],["Researcher's discovery changes how a disease is treated","اكتشاف باحث يغيّر علاج مرض","la ct"],["Designer's app is used by millions","تطبيق من تصميمك يستخدمه الملايين","cr tc"],["Beloved teacher honored by former students","معلّم محبوب يكرّمه طلابه السابقون","te si"],["Health hero saves lives during a crisis","بطل صحي ينقذ أرواحًا في أزمة","rs si"],["Engineer's bridge opens after a record build","جسر من تصميم مهندس يُفتتح بعد بناء قياسي","pr nu"],["Author's novel tops the charts","رواية مؤلف تتصدر المبيعات","wr cr"],["Lawyer wins a landmark case","محامٍ يكسب قضية تاريخية","ct pe"],["Athlete breaks a national record","رياضي يحطّم رقمًا قياسيًا وطنيًا","ph rs"],["Investor's fund beats the market","صندوق مستثمر يتفوّق على السوق","nu st"],["Guide's expedition finds a hidden place","رحلة مرشد تكتشف مكانًا خفيًا","ex ad"],["Director's film wins an award","فيلم مخرج يفوز بجائزة","cr pf"],["Detective cracks a long-unsolved case","محقق يحلّ قضية عمرها سنوات","ob ct"],["Organizer's festival unites the city","مهرجان منظّم يجمع المدينة","or le"],["Security expert stops a major attack","خبير أمن يوقف هجومًا كبيرًا","tc ct"],["Chef opens a restaurant with a waiting list","شيف يفتتح مطعمًا بقائمة انتظار","pr cr"],["Diplomat brokers a peace deal","دبلوماسي يتوسط في اتفاق سلام","co pe"],["Coach turns a struggling team into champions","مدرب يحوّل فريقًا متعثرًا إلى بطل","le te"]]},{"en":"Which object would you most want in your hands?","ar":"أي غرض تتمنى أن يكون بين يديك؟","items":[["A telescope","تلسكوب","ob ex"],["A microscope","مجهر","la ct"],["A toolbox","صندوق أدوات","pr ps"],["A laptop","حاسوب محمول","tc ps"],["A paintbrush","فرشاة رسم","cr ob"],["A microphone","ميكروفون","pf co"],["A stethoscope","سمّاعة طبيب","si ct"],["A notebook and pen","دفتر وقلم","wr la"],["A compass","بوصلة","ex pl"],["A calculator","آلة حاسبة","nu or"],["A coach's whistle","صفّارة مدرب","ph le"],["A judge's gavel","مطرقة قاضٍ","ct dm"],["A camera","كاميرا","ob cr"],["A blueprint","مخطط هندسي","pl pr"],["A chef's knife","سكّين طاهٍ","pr cr"],["A chessboard","رقعة شطرنج","st ct"],["A megaphone","مكبّر صوت","pe le"],["A cash register","صندوق مبيعات","en pe"],["A whiteboard","سبّورة","te st"],["A flight map","خريطة طيران","ex dm"]]}];
+const BASE=questions.length;
+const QQ=q=>typeof q==="object"?q:questions[q];
+const shuf=n=>{const a=[...Array(n).keys()];for(let i=n-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;};
+function genQ(bi,ws){
+  const B=BANKS[bi];
+  const pool=B.items.map(it=>[it,1+it[2].split(" ").reduce((a,k)=>a+(ws[k]||0),0)]),out=[],used=new Set();
+  while(out.length<4&&pool.length){
+    let r=Math.random()*pool.reduce((a,x)=>a+x[1],0),i=0;
+    while(i<pool.length-1&&r>=pool[i][1]){r-=pool[i][1];i++;}
+    const it=pool.splice(i,1)[0][0],f=it[2].split(" ")[0];
+    if(!used.has(f)){used.add(f);out.push(it);}
+  }
+  if(out.length<4)return null;
+  const sc=t=>{const o={};t.split(" ").forEach((x,n)=>o[x]=n?2:4);return o;};
+  return {q:B.en,b:bi,a:out.map(it=>[it[0],sc(it[2])]),ar:[B.ar,...out.map(it=>it[1])]};
+}
+const sn=s=>lang==="ar"?s.ar:s.en;
 /* ---------- UI ---------- */
 const $ = id=>document.getElementById(id);
-let cur=0, answers=[], summary="";
+let cur=0, path=[18], picks=[], summary="", lastTr=[];
+let TOTAL=10,rejected=[],noteAt={},perms=[],JT=null;
 const show = id=>["hero","quiz","result"].forEach(s=>$(s).hidden = s!==id);
 
+function smartNext(){
+  const C=[],ws={};rankJobs(calculate(path,picks)).slice(0,12).forEach(j=>j[2].split(" ").forEach(k=>ws[k]=(ws[k]||0)+1));
+  for(let q=0;q<BASE;q++){if(q===18||path.includes(q)||(q>=18&&rejected.length<2))continue;C.push({o:questions[q],idx:q});}
+  BANKS.forEach((_,bi)=>{if(path.filter(i=>i>=BASE&&questions[i].b===bi).length>=2||questions[path[path.length-1]].b===bi)return;for(let k=0;k<2;k++){const o=genQ(bi,ws);if(o)C.push({o,idx:-1});}});
+  C.forEach(c=>{const tops=new Set(),u=new Set();c.o.a.forEach((_,i)=>{const P=[...path,c.o],K=[...picks,i],r=rankJobs(calculate(P,K),P,K);tops.add(r[0]);r.slice(0,3).forEach(j=>u.add(j));});c.sc=tops.size*5+u.size;});
+  const mx=Math.max(...C.map(c=>c.sc)),top=C.filter(c=>c.sc>=mx-3),ch=top[Math.floor(Math.random()*top.length)];
+  if(ch.idx>=0)return ch.idx;
+  questions.push({q:ch.o.q,b:ch.o.b,a:ch.o.a});AR.q.push(ch.o.ar);return questions.length-1;
+}
+function nextQ(){
+  const g=picks[0],n=path.length,c=n>1&&g>0?clusterOf(path,picks):0,fixed=g===0?[18,19,26]:[18,32+g,19+c,26+c];
+  return n<fixed.length?fixed[n]:smartNext();
+}
 function render(){
-  const q=questions[cur], card=$("qcard");
-  $("count").textContent=t("count",cur+1,questions.length);
-  const p=Math.round(cur/questions.length*100);
+  const qi=path[cur],q=questions[qi],card=$("qcard"),p=Math.round(cur/TOTAL*100);
+  $("count").textContent=t("count",cur+1,TOTAL);
   $("pct").textContent=p+"%"; $("fill").style.width=p+"%";
   document.querySelector('[role=progressbar]').setAttribute("aria-valuenow",p);
-  $("qtext").textContent=ql(cur)[0];
+  $("qtext").textContent=ql(qi)[0];
+  const cx=$("ctx"),nj=noteAt[cur];cx.hidden=cur===0;if(cur>0)cx.textContent=(nj!=null?t("rej",JOBS[nj][lang==="ar"?1:0])+" ":"")+t("ctx",ql(path[cur-1])[picks[cur-1]+1]);
   const box=$("answers"); box.innerHTML="";
-  q.a.forEach((a,i)=>{
+  if(!perms[cur])perms[cur]=cur===0?[...Array(q.a.length).keys()]:shuf(q.a.length);
+  perms[cur].forEach((real,pos)=>{
     const b=document.createElement("button");
-    b.className="ans"; b.type="button"; b.setAttribute("aria-pressed",answers[cur]===i);
-    b.innerHTML=`<b aria-hidden="true">${i+1}</b><span></span>`; b.lastChild.textContent=ql(cur)[i+1];
-    b.onclick=()=>choose(i); box.appendChild(b);
+    b.className="ans"; b.type="button"; b.setAttribute("aria-pressed",picks[cur]===real);
+    b.innerHTML=`<b aria-hidden="true">${pos+1}</b><span></span>`; b.lastChild.textContent=ql(qi)[real+1];
+    b.onclick=()=>choose(real); box.appendChild(b);
   });
   $("prev").disabled=cur===0;
-  $("next").disabled=answers[cur]==null;
-  $("next").textContent=t(cur===questions.length-1?"see":"next");
+  $("next").disabled=picks[cur]==null;
+  $("next").textContent=t(cur===TOTAL-1?"see":"next");
   card.classList.remove("out");
 }
 function go(n){
-  const card=$("qcard"); card.classList.add("out");
-  setTimeout(()=>{cur=n;render();$("qtext").focus({preventScroll:true});},220);
+  lock=true;$("qcard").classList.add("out");
+  const e=ep;setTimeout(()=>{if(e!==ep)return;cur=n;render();lock=false;$("qtext").focus({preventScroll:true});},220);
 }
-let lock=false;
+let lock=false,ep=0;
 function choose(i){
-  if(lock)return; answers[cur]=i;
-  [...$("answers").children].forEach((b,j)=>b.setAttribute("aria-pressed",j===i));
+  if(lock)return;
+  if(picks[cur]!==i){picks.length=cur;picks[cur]=i;path.length=cur+1;perms.length=cur+1;if(cur<4){TOTAL=10;rejected=[];noteAt={};}}
+  [...$("answers").children].forEach((b,j)=>b.setAttribute("aria-pressed",perms[cur][j]===i));
   $("next").disabled=false; lock=true;
-  setTimeout(()=>{lock=false;advance();},380);
+  const e=ep;setTimeout(()=>{if(e!==ep)return;advance();},380);
 }
-function advance(){ if(answers[cur]==null)return; cur<questions.length-1?go(cur+1):finish(); }
+function advance(){
+  if(picks[cur]==null){lock=false;return;}
+  if(cur>=TOTAL-1){lock=false;finish();return;}
+  if(path.length<=cur+1)path.push(nextQ());
+  go(cur+1);
+}
 
 function countUp(el,to){
   const t0=performance.now();
   (function f(t){const k=Math.min(1,(t-t0)/1100);el.textContent=Math.round(to*(1-Math.pow(1-k,3)))+"%";if(k<1)requestAnimationFrame(f);})(t0);
 }
-function skillRow(s,i){
+function skillRow(s,i,an){
   const d=document.createElement("div"); d.className="sk";
   d.innerHTML=`<span class="n">${String(i+1).padStart(2,"0")}</span><span style="font-weight:700"></span><span class="p">0%</span><div class="bar"><i></i></div>`;
-  d.children[1].textContent=L(s.k,0); countUp(d.children[2],s.pct);
-  requestAnimationFrame(()=>requestAnimationFrame(()=>d.querySelector("i").style.width=s.pct+"%"));
+  d.children[1].textContent=sn(s);
+  const m=document.createElement("small");m.style.cssText="color:var(--mut);font-weight:500;margin-inline-start:8px";m.textContent=DOM[s.d][lang==="ar"?1:0];d.children[1].appendChild(m);
+  if(an){countUp(d.children[2],s.pct);requestAnimationFrame(()=>requestAnimationFrame(()=>d.querySelector("i").style.width=s.pct+"%"));}
+  else{d.children[2].textContent=s.pct+"%";d.querySelector("i").style.width=s.pct+"%";}
   return d;
 }
 function finish(){
   $("fill").style.width="100%";
-  lastSorted=calculate(answers);renderResult();
-  show("result"); window.scrollTo({top:0,behavior:"smooth"});
+  lastTr=calculate(path,picks);renderResult();show("result");window.scrollTo({top:0,behavior:"smooth"});
 }
 function renderResult(){
-  const sorted=lastSorted,prof=pickProfile(sorted),pi=PROFILES.indexOf(prof),ar=lang==="ar",pn=ar?AR.profiles[pi][0]:prof[0],pd=ar?AR.profiles[pi][1]:prof[2];
-  $("pname").textContent=pn;
-  $("top3").innerHTML=""; sorted.slice(0,3).forEach(s=>{const d=document.createElement("div");d.innerHTML="<span></span><span>"+s.pct+"%</span>";d.firstChild.textContent=L(s.k,0);$("top3").appendChild(d);});
-  $("top5").innerHTML=""; sorted.slice(0,5).forEach((s,i)=>$("top5").appendChild(skillRow(s,i)));
-  $("all").innerHTML=""; sorted.forEach((s,i)=>$("all").appendChild(skillRow(s,i)));
-  $("all").hidden=true; $("toggle").textContent=t("explore"); $("toggle").setAttribute("aria-expanded","false");
-  $("interp").textContent=interpret(sorted,pd);
-  $("areas").innerHTML=""; suggestions(sorted).forEach(a=>{const t=document.createElement("span");t.className="tag";t.textContent=a;$("areas").appendChild(t);});
-  summary=t("sum",pn,sorted.slice(0,3).map(s=>L(s.k,0)+" ("+s.pct+"%)").join(lang==="ar"?"، ":", "));
+  const tr=lastTr,ar=lang==="ar",sl=skillList(tr),top5=pickTop(sl,5),prof=pickProfile(tr),pi=PROFILES.indexOf(prof),
+   pn=ar?AR.profiles[pi][0]:prof[0],pd=ar?AR.profiles[pi][1]:prof[2],jobs=rankJobs(tr),jn=j=>ar?j[1]:j[0],sep=ar?"، ":", ";
+  $("pname").textContent=pn;$("rjob").textContent=t("rjob")+jn(jobs[0]);
+  $("top3").innerHTML="";top5.slice(0,3).forEach(s=>{const d=document.createElement("div");d.innerHTML="<span></span><span>"+s.pct+"%</span>";d.firstChild.textContent=sn(s);$("top3").appendChild(d);});
+  $("top5").innerHTML="";top5.forEach((s,i)=>$("top5").appendChild(skillRow(s,i,true)));
+  $("all").innerHTML="";sl.forEach((s,i)=>$("all").appendChild(skillRow(s,i,false)));
+  $("all").hidden=true;$("toggle").textContent=t("explore");$("toggle").setAttribute("aria-expanded","false");
+  $("jobn").textContent=jn(jobs[0]);$("ruled").hidden=!rejected.length;$("ruled").textContent=t("ruled",rejected.map(i=>jn(JOBS[i])).join(sep));
+  $("jobw").textContent=t("why",top5.slice(0,3).map(sn).join(sep));
+  $("joba").textContent=t("alt")+" "+jobs.slice(1,3).map(jn).join(sep);
+  $("interp").textContent=interpret(tr,pd);
+  $("areas").innerHTML="";suggestions(tr).forEach(a=>{const e=document.createElement("span");e.className="tag";e.textContent=a;$("areas").appendChild(e);});
+  summary=t("sum",pn,top5.slice(0,3).map(s=>sn(s)+" ("+s.pct+"%)").join(sep),jn(jobs[0]));
 }
 function toast(m){const t=document.createElement("div");t.className="toast";t.setAttribute("role","status");t.textContent=m;document.body.appendChild(t);setTimeout(()=>t.remove(),2200);}
 async function copyText(){
@@ -387,10 +477,10 @@ async function copyText(){
   catch(e){ const ta=document.createElement("textarea");ta.value=summary;document.body.appendChild(ta);ta.select();
     try{document.execCommand("copy");toast(t("copied"));}catch(_){toast(t("copyfail"));} ta.remove(); }
 }
-$("start").onclick=()=>{cur=0;answers=[];show("quiz");render();window.scrollTo({top:0,behavior:"smooth"});};
-$("prev").onclick=()=>{if(cur>0)go(cur-1);};
-$("next").onclick=advance;
-$("again").onclick=()=>{cur=0;answers=[];show("quiz");render();window.scrollTo({top:0});};
+$("start").onclick=()=>{ep++;lock=false;cur=0;path=[18];picks=[];TOTAL=10;rejected=[];noteAt={};perms=[];questions.length=BASE;AR.q.length=BASE;show("quiz");render();window.scrollTo({top:0,behavior:"smooth"});};
+$("prev").onclick=()=>{if(cur>0&&!lock)go(cur-1);};
+$("next").onclick=()=>{if(!lock)advance();};
+$("again").onclick=()=>{ep++;lock=false;cur=0;path=[18];picks=[];TOTAL=10;rejected=[];noteAt={};perms=[];questions.length=BASE;AR.q.length=BASE;show("quiz");render();window.scrollTo({top:0});};
 $("copy").onclick=copyText;
 $("share").onclick=async()=>{
   if(navigator.share){ try{ await navigator.share({title:t("stitle"),text:summary}); return; }catch(e){ if(e&&e.name==="AbortError")return; } }
@@ -400,20 +490,27 @@ $("toggle").onclick=()=>{const h=$("all").hidden;$("all").hidden=!h;$("toggle").
 document.addEventListener("keydown",e=>{
   if($("quiz").hidden||e.ctrlKey||e.metaKey||e.altKey)return;
   const n=parseInt(e.key,10);
-  if(n>=1&&n<=questions[cur].a.length)choose(n-1);
+  if(n>=1&&n<=QQ(path[cur]).a.length)choose(perms[cur][n-1]);
   else if(e.key===(lang==="ar"?"ArrowLeft":"ArrowRight"))advance();
   else if(e.key===(lang==="ar"?"ArrowRight":"ArrowLeft")&&cur>0)go(cur-1);
 });
 function applyLang(){
   const d=document.documentElement;d.lang=lang;d.dir=lang==="ar"?"rtl":"ltr";document.title=t("title");
   const h=t("h1");$("h1").innerHTML=h[0]+"<span>"+h[1]+"</span>";
-  ["sub","trust","start","prev","h2a","h2b","h2c","exp","note","f1","f2","rsmall","rfoot","share","copy","again"].forEach(k=>$(k).textContent=t(k));
+  ["sub","trust","start","prev","h2a","h2j","jobok","jobno","h2b","h2c","exp","note","f1","f2","rsmall","rfoot","share","copy","again"].forEach(k=>$(k).textContent=t(k));
   $("lang").textContent=t("other");
   $("chips").innerHTML=[["🧩","ps"],["🎨","cr"],["💬","co"],["🧭","st"],["🔭","ob"],["🚀","en"]].map(([e,k])=>`<span class="chip">${e} ${L(k,0)}</span>`).join("");
   if(!$("quiz").hidden)render();
   if(!$("result").hidden)renderResult();else $("toggle").textContent=t("explore");
 }
 $("lang").onclick=()=>{lang=lang==="en"?"ar":"en";try{localStorage.setItem("sdna-lang",lang);}catch(e){}applyLang();};
+$("jobok").onclick=()=>toast(t("thanks"));
+$("jobno").onclick=()=>{
+  const top=rankJobs(lastTr)[0];rejected.push(JOBS.indexOf(top));
+  const q=smartNext();if(q<0){rejected.pop();return;}
+  TOTAL+=2;path.push(q);cur=path.length-1;noteAt[cur]=JOBS.indexOf(top);
+  show("quiz");render();window.scrollTo({top:0});
+};
 applyLang();
 </script>
 </body>
