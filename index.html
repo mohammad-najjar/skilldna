@@ -18,6 +18,11 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>SkillDNA — Discover What You're Naturally Good At</title>
+<meta name="description" content="اختبار مجاني من 10 أسئلة يكشف مهاراتك الطبيعية والوظائف الأنسب لك. بدون تسجيل. Free 10-question skills test.">
+<link rel="canonical" href="https://skilldna.online/">
+<meta property="og:title" content="SkillDNA — اكتشف ما تتقنه بالفطرة">
+<meta property="og:description" content="اكتشف مهاراتك ووظيفتك الأنسب في 3 دقائق.">
+<meta property="og:type" content="website">
 <style>
 :root{--bg:#f7f6fb;--card:#fff;--ink:#16132b;--mut:#6b6885;--line:#e6e3f2;--a:#6c4cf5;--b:#13b5a5;--c:#ff7a59;--sh:0 10px 40px rgba(60,40,140,.10);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f0d1f;--card:#1a1730;--ink:#f3f1ff;--mut:#a29fc0;--line:#2c2850;--sh:0 10px 40px rgba(0,0,0,.4)}}
@@ -79,6 +84,7 @@ footer{text-align:center;color:var(--mut);font-size:.9rem;padding:24px 20px}
 .jobcard{background:var(--card);border:1px solid var(--line);border-radius:24px;padding:24px;box-shadow:var(--sh)}.jobn{font-size:clamp(1.6rem,6vw,2.3rem);font-weight:800;letter-spacing:-.02em}.ctx{color:var(--mut);font-size:.9rem;margin:0 0 10px}
 [dir=rtl] *{letter-spacing:0!important}[dir=rtl] .rcard:after{right:auto;left:-90px}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+.about{line-height:1.8;margin-top:56px}.about h3{font-size:1.1rem;margin:1.2em 0 .3em}.about p,.about li{color:var(--mut)}.about a,footer a{color:var(--a)}footer nav{margin-top:10px;display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -93,6 +99,7 @@ footer{text-align:center;color:var(--mut);font-size:.9rem;padding:24px 20px}
 <p style="margin-top:28px"><button class="btn pri" id="start">Discover My Skills →</button></p>
 <p class="trust" id="trust">10 smart questions • 3 minutes • No account required</p>
 <div class="chips" id="chips" aria-hidden="true"></div>
+<article class="about"><div lang="ar" dir="rtl"><h2>كيف يعمل اختبار SkillDNA؟</h2><p>يقيس الاختبار 24 مهارة أساسية، منها حل المشكلات والتفكير النقدي والإبداع والتواصل والقيادة والتخطيط، اعتماداً على اختياراتك في مواقف يومية واقعية. كل إجابة تمنح نقاطاً لمجموعة من المهارات، ثم تُحسب نسبة كل مهارة لتظهر لك أقوى مهاراتك وشخصيتك المهنية والوظائف الأقرب لك.</p><h2>لمن هذا الاختبار؟</h2><p>للطلاب الذين يختارون تخصصهم الجامعي، وللخريجين الباحثين عن مجال عمل، ولكل من يفكر بتغيير مساره المهني ويريد فهم نقاط قوته.</p><h2>ماذا ستحصل عليه؟</h2><p>ترتيب لأقوى مهاراتك مع نسبة لكل مهارة، وتحليل مختصر لشخصيتك، واقتراح للوظيفة الأنسب مع بدائل، ومجالات مقترحة للاستكشاف.</p><h2>أسئلة شائعة</h2><h3>هل النتيجة علمية؟</h3><p>لا، هي أداة لاكتشاف الذات وليست تشخيصاً نفسياً ولا بديلاً عن الاستشارة المهنية.</p><h3>هل أحتاج إلى حساب؟</h3><p>لا، الاختبار مجاني وبدون تسجيل، وإجاباتك تبقى في متصفحك.</p><h3>كم يستغرق الاختبار؟</h3><p>حوالي 3 دقائق للإجابة عن 10 أسئلة.</p></div><div lang="en" dir="ltr"><h2>How SkillDNA works</h2><p>The test measures 24 core skills, including problem solving, critical thinking, creativity, communication, leadership and planning, based on how you choose to act in everyday situations. Your answers are scored per skill, then ranked to reveal your strongest skills, your professional profile and best-fit careers.</p><p>It is free, needs no account, and your answers stay in your browser. Results are a self-discovery tool, not a scientific assessment.</p></div></article>
 </section>
 
 <section id="quiz" hidden aria-live="polite">
@@ -113,7 +120,7 @@ footer{text-align:center;color:var(--mut);font-size:.9rem;padding:24px 20px}
 <p class="note" id="note">This result is a self-discovery tool, not a scientific assessment.</p>
 </section>
 </main>
-<footer><div id="f1">SkillDNA © 2026</div><div id="f2">Discover yourself. Explore your potential.</div></footer>
+<footer><div id="f1">SkillDNA © 2026</div><div id="f2">Discover yourself. Explore your potential.</div><nav><a href="/about.html">من نحن</a><a href="/contact.html">اتصل بنا</a><a href="/privacy.html">سياسة الخصوصية</a><a href="/terms.html">شروط الاستخدام</a></nav></footer>
 
 <script>
 "use strict";
